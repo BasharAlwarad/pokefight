@@ -1,0 +1,136 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  --color: red,
+  --bg-color: rgba(177, 172, 172, 0.463),
+}
+
+div.App{
+  min-height: 100vh;
+  background: linear-gradient(to right, #d4d3dd, #efefbb);
+  display: grid;
+  gap: 1vw;
+  grid:
+  [nav]'nav nav nav' minmax(5vh, auto) [nav] 
+  [list]'. list .' minmax(82vh, auto) [list]
+  [pag]'. pag .'  minmax(2vh, auto) [pag]
+  [foot]'foot foot foot' minmax(5vh, auto) [foot] 
+  / 10vw auto 10vw;
+}
+
+/* navigation start */
+.navigation{
+  grid-area: nav;
+}
+/* navigation end */
+
+
+
+/* poke-list start */
+.poke-list{
+  /* background: green; */
+  grid-area: list;
+
+}
+  .all-tiers{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+    background: rgba(232, 172, 172, 0.375);
+  }
+
+  .tiers{
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+.poke-container {
+  max-height: 100%;
+  display: flex;
+  flex-flow:row wrap;
+  align-items: space-between;
+  justify-content: center;
+  /* overflow-y: scroll; */
+  margin-bottom: .5rem;
+  background: rgba(232, 172, 172, 0.375);
+}
+
+.pokemon {
+  max-width: 32%;
+  min-width: 32%;
+  background-color: #eee;
+  border-radius: .5rem;
+  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+  margin: .1rem;
+  padding: .3rem;
+  text-align: center;
+}
+
+.pokemon .img-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  margin: auto ;
+  text-align: center;
+}
+
+.pokemon .img-container img {
+  /* max-width: 50px; */
+  max-width: 9rem;
+  margin-top: 1rem;
+}
+
+.pokemon .info {
+  margin-top: 1rem;
+}
+
+.pokemon .info .number {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: .1rem .2rem;
+  border-radius: .4rem;
+  font-size: 0.8em;
+}
+
+.pokemon .info .name {
+  margin: .7rem 0 .2rem;
+  letter-spacing: .05rem;
+}
+
+.cards-lists{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.cards-base-list{
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  list-style-type: none;
+}
+
+/* poke-list end */
+
+/* pagination start */
+.pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: pag;
+  
+}
+/* pagination end */
+
+/* footer start */
+.footer{
+  /* background: blue; */
+  grid-area: foot;
+  
+}
+/* footer end */
