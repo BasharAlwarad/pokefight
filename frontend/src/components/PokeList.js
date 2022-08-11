@@ -75,7 +75,6 @@ function Pokelist() {
 
   useEffect(() => {
     setChosenPokemon(JSON.parse(localStorage.getItem("pokeArr")))
-    console.log(chosenPokemon)
   }, [changeInCard])
 
   return (

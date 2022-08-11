@@ -52,7 +52,7 @@ function App() {
     <div className='App'>
       {isAuth ? (
         <>
-          <Nav />
+          {/* <Nav /> */}
           <Chat client={client}>
             <JoinGame />
             <button className='log-out' onClick={logOut}>

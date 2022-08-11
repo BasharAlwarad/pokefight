@@ -63,7 +63,6 @@ form > * {
 
 /* poke-list start */
 .poke-list {
-  /* background: green; */
   grid-area: list;
   max-width: 90%;
   display: grid;
@@ -126,6 +125,7 @@ div.chosen-pokemon-list > * {
   padding: 0.3rem;
   text-align: center;
   cursor: pointer;
+  user-select: none;
 }
 
 .pokemon:hover {
@@ -245,14 +245,7 @@ div.chosen-pokemon-list > * {
   color: white;
 }
 
-.board {
-  width: 500px;
-  height: 500px;
-  background-color: rgb(252, 252, 252);
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-}
+
 
 .row {
   flex: 33%;

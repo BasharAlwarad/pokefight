@@ -14,7 +14,7 @@ const Card = props => {
     }
     let arr = []
     if (localStorage.getItem('pokeArr')) {
-      if (JSON.parse(localStorage.getItem('pokeArr')).length <= 10) {
+      if (JSON.parse(localStorage.getItem('pokeArr')).length <= 2) {
         JSON.parse(localStorage.getItem('pokeArr')).forEach(e => {
           arr.push(e)
         })
