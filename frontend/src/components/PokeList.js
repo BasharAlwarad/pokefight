@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import dataPlus from '../data/poke_data.json'
 
+import Card from './Card'
+
 function Pokelist() {
   const colors = {
     fire: '#FDDFDF',
@@ -19,8 +21,13 @@ function Pokelist() {
     fighting: '#E6E0D4',
     normal: '#F5F5F5',
   }
-  const [pokemon_count, setPokemon_count] = useState(30)
+  const [pokemon_count, setPokemon_count] = useState(3)
   const [pokemon_Arr, setPokemon_Arr] = useState([])
+  const [chosenPokemon, setChosenPokemon] = useState(
+    localStorage.getItem('pokeArr') &&
+      JSON.parse(localStorage.getItem('pokeArr'))
+  )
+  const [changeInCard, setChangeInCard] = useState({})
 
   // creating pokemon list array & adding background func
   const getPokeList = async () => {
@@ -33,7 +40,6 @@ function Pokelist() {
         pokemonCardsColors(data)
         pokemonCardsData(data)
         arr.push(data)
-        console.log(arr)
       }
       setPokemon_Arr(arr)
     } catch (error) {
@@ -46,7 +52,6 @@ function Pokelist() {
     const main_types = Object.keys(colors)
     const poke_types = pokemon.types[0].type.name
     const type = main_types.find(e => poke_types.indexOf(e) > -1)
-    console.log(type)
     const color = colors[type]
     pokemon.color = color
   }
@@ -55,16 +60,33 @@ function Pokelist() {
   // note same pokemon in both APIs have same ids
   const pokemonCardsData = pokemon => {
     const x = dataPlus.find(e => e.id === pokemon.id)
-    const base =  x.base
+    const base = x.base
     pokemon.base = base
+  }
+
+  // pull pokemon list value from pokemon card component
+  const get_pokemon = v => {
+    setChangeInCard(v)
   }
 
   useEffect(() => {
     getPokeList()
   }, [])
 
+  useEffect(() => {
+    setChosenPokemon(JSON.parse(localStorage.getItem("pokeArr")))
+    console.log(chosenPokemon)
+  }, [changeInCard])
+
   return (
     <Container className='poke-list'>
+      <div className='chosen-pokemon-list'>
+        <h1>Your Set</h1>
+        {chosenPokemon &&
+          chosenPokemon.map((pokemon, i) => (
+            <Card func={get_pokemon} pokemon={pokemon} i={i} key={i} />
+          ))}
+      </div>
       <div className='all-tiers'>
         <div className='tiers'>FIRST TIER</div>
         <div className='tiers'>SECOND TIER</div>
@@ -73,47 +95,7 @@ function Pokelist() {
       <div className='poke-container' id='poke-container'>
         {pokemon_Arr &&
           pokemon_Arr.map((pokemon, i) => (
-            <div
-              key={i}
-              className='pokemon'
-              style={{ background: pokemon.color }}
-            >
-              <div className='img-container'>
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
-                  alt=''
-                />
-              </div>
-              <div className='info'>
-                <span className='number'>
-                  {pokemon.id.toString().padStart(3, '0')}
-                </span>
-                <h3 className=''>
-                  {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
-                </h3>
-                <small className='type'>
-                  Type:{' '}
-                  <span>
-                    {pokemon.types[0].type.name} /{' '}
-                    {pokemon.types[1] && pokemon.types[1].type.name}
-                  </span>
-                </small>
-                {pokemon && pokemon.base && (
-                  <div className='cards-lists'>
-                    <ul className='cards-base-list'>
-                      <li>HP: {pokemon.base.HP}</li>
-                      <li>Attack: {pokemon.base.Attack}</li>
-                      <li>Defense: {pokemon.base.Defense}</li>
-                    </ul>
-                    <ul className='cards-base-list'>
-                      <li>Sp. Attack: {pokemon.base['Sp. Attack']}</li>
-                      <li>Sp. Defense: {pokemon.base['Sp. Defense']}</li>
-                      <li>Speed: {pokemon.base.Speed}</li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
+            <Card func={get_pokemon} pokemon={pokemon} i={i} key={i} />
           ))}
       </div>
     </Container>

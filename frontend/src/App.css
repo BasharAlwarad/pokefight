@@ -1,115 +1,181 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: all 0.2s;
 }
 
-:root{
-  --color: red,
-  --bg-color: rgba(177, 172, 172, 0.463),
+:root {
+  --color: red;
+  --bg-color: rgba(177, 172, 172, 0.463);
+  --list-bg-color: rgba(232, 172, 172, 0.375);
 }
 
-div.App{
+div.App {
   min-height: 100vh;
   background: linear-gradient(to right, #d4d3dd, #efefbb);
-  display: grid;
-  gap: 1vw;
-  grid:
-  [nav]'nav nav nav' minmax(5vh, auto) [nav] 
-  [list]'. list .' minmax(82vh, auto) [list]
-  [pag]'. pag .'  minmax(2vh, auto) [pag]
-  [foot]'foot foot foot' minmax(5vh, auto) [foot] 
-  / 10vw auto 10vw;
+  /* display: grid; */
+  /* gap: 1vw; */
+  /* grid:
+  [log]'. log .' minmax(10vh, auto) [log]
+  [sign]'. sign .' minmax(10vh, auto) [sign]
+  /* [nav]'nav nav nav' minmax(1vh, auto) [nav]  */
+  /* [game]'. game out' minmax(30vh, auto) [game] */
+  /* [list]'. list .' minmax(50vh, auto) [list] */
+  /* [pag]'. pag .'  minmax(1vh, auto) [pag] */
+  /* [foot]'foot foot foot' minmax(1vh, auto) [foot]  */
+  /* / 10vw auto 10vw; */
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  gap: 1rem;
 }
 
+/* SignUp login form same style start */
+.login {
+  grid-area: log;
+}
+.signUp {
+  grid-area: sign;
+}
+.signUp,
+.login,
+.signUp-form,
+.login-form,
+form > * {
+  display: flex;
+  gap: 0.4rem;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 0.1rem;
+}
+/* SignUp login form same style end */
+
 /* navigation start */
-.navigation{
+.navigation {
   grid-area: nav;
+  min-width: 100%;
 }
 /* navigation end */
 
-
-
 /* poke-list start */
-.poke-list{
+.poke-list {
   /* background: green; */
   grid-area: list;
-
+  max-width: 90%;
+  display: grid;
+  gap: 0.3rem;
+  grid:
+    [tiers] 'cp tiers .' minmax(1vh, auto) [tiers]
+    [pc] 'cp pc .' [pc]
+    / 25vw 65vw auto;
 }
-  .all-tiers{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    align-items: center;
-    justify-items: center;
-    background: rgba(232, 172, 172, 0.375);
-  }
+.all-tiers {
+  grid-area: tiers;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  justify-items: center;
+  background: var(--list-bg-color);
+}
 
-  .tiers{
-    font-size: 2rem;
-    text-align: center;
-  }
-  
+.tiers {
+  font-size: 2rem;
+  text-align: center;
+}
+.chosen-pokemon-list {
+  grid-area: cp;
+  /* background: red; */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  justify-items: flex-start;
+}
+
+div.chosen-pokemon-list > * {
+  min-width: 90% !important;
+}
+.chosen-pokemon-list h1 {
+  text-align: center;
+  background: var(--list-bg-color);
+}
 .poke-container {
+  grid-area: pc;
   max-height: 100%;
   display: flex;
-  flex-flow:row wrap;
+  flex-flow: row wrap;
   align-items: space-between;
   justify-content: center;
-  /* overflow-y: scroll; */
-  margin-bottom: .5rem;
-  background: rgba(232, 172, 172, 0.375);
+  margin-bottom: 0.5rem;
+  background: var(--list-bg-color);
 }
 
 .pokemon {
   max-width: 32%;
   min-width: 32%;
+  max-height: 20rem;
   background-color: #eee;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
-  margin: .1rem;
-  padding: .3rem;
+  margin: 0.1rem;
+  padding: 0.3rem;
   text-align: center;
+  cursor: pointer;
+}
+
+.pokemon:hover {
+  transform: scale(1.05);
+  transition: all 0.3s;
+}
+.pokemon.clicked {
+  transform: scale(0.9);
+  transition: all 0.3s;
 }
 
 .pokemon .img-container {
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 50%;
-  width: 10rem;
-  height: 10rem;
-  margin: auto ;
+  width: 70%;
+  margin: auto;
   text-align: center;
 }
 
 .pokemon .img-container img {
-  /* max-width: 50px; */
-  max-width: 9rem;
+  max-width: 7rem;
   margin-top: 1rem;
 }
 
 .pokemon .info {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .pokemon .info .number {
   background-color: rgba(0, 0, 0, 0.1);
-  padding: .1rem .2rem;
-  border-radius: .4rem;
+  padding: 0.1rem 0.2rem;
+  border-radius: 0.4rem;
   font-size: 0.8em;
 }
 
 .pokemon .info .name {
-  margin: .7rem 0 .2rem;
-  letter-spacing: .05rem;
+  margin: 0.7rem 0 0.2rem;
+  letter-spacing: 0.05rem;
 }
 
-.cards-lists{
+.cards-lists {
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-.cards-base-list{
+.cards-base-list {
   display: flex;
+  font-size: 0.9rem;
   flex-flow: column wrap;
   align-items: flex-start;
   list-style-type: none;
@@ -118,19 +184,136 @@ div.App{
 /* poke-list end */
 
 /* pagination start */
-.pagination{
+.pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   grid-area: pag;
-  
 }
 /* pagination end */
 
 /* footer start */
-.footer{
+.footer {
   /* background: blue; */
   grid-area: foot;
-  
 }
 /* footer end */
+
+/* game details start */
+/* .App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #76a2ff;
+} */
+
+.login,
+.signUp {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.login input,
+.signUp input {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 300px;
+  height: 30px;
+}
+
+.login button,
+.signUp button {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 320px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.login label,
+.signUp label {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: white;
+}
+
+.board {
+  width: 500px;
+  height: 500px;
+  background-color: rgb(252, 252, 252);
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  flex: 33%;
+  display: flex;
+  flex-direction: row;
+}
+
+.square {
+  flex: 33%;
+  height: 100%;
+  border: 1px solid black;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.square:active {
+  background-color: lightgray;
+}
+
+h4 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: red;
+  font-size: 2rem;
+}
+
+.joinGame {
+  grid-area: game;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+.joinGame input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /* width: 220px; */
+  height: 2rem;
+}
+
+.log-out {
+  grid-area: out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: fit-content;
+  max-height: 2rem;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.joinGame button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /* width: 220px; */
+  /* height: 51px; */
+  cursor: pointer;
+}
+/* game details end */
