@@ -3,17 +3,21 @@
   margin: 0;
   padding: 0;
   transition: all 0.2s;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 :root {
   --color: red;
-  --bg-color: rgba(177, 172, 172, 0.463);
-  --list-bg-color: rgba(232, 172, 172, 0.375);
+  --bg-color: rgba(107, 108, 110, 0.948);
+  --list-bg-color: rgba(107, 108, 110, 0.948);
 }
 
 div.App {
   min-height: 100vh;
-  background: linear-gradient(to right, #d4d3dd, #efefbb);
+  background-image: url(../public/img/Background-Image.avif);
+  background-size: cover;
+  opacity: 0.8;
+  /* background: linear-gradient(to right, #d4d3dd, #efefbb); */
   /* display: grid; */
   /* gap: 1vw; */
   /* grid:
@@ -39,6 +43,7 @@ div.App {
 }
 .signUp {
   grid-area: sign;
+  margin-bottom: 50%;
 }
 .signUp,
 .login,
@@ -68,8 +73,8 @@ form > * {
   display: grid;
   gap: 0.3rem;
   grid:
-    [tiers] 'cp tiers .' minmax(1vh, auto) [tiers]
-    [pc] 'cp pc .' [pc]
+    [tiers] "cp tiers ." minmax(1vh, auto) [tiers]
+    [pc] "cp pc ." [pc]
     / 25vw 65vw auto;
 }
 .all-tiers {
@@ -80,10 +85,11 @@ form > * {
   align-items: center;
   justify-items: center;
   background: var(--list-bg-color);
+  color: white;
 }
 
 .tiers {
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
 }
 .chosen-pokemon-list {
@@ -102,6 +108,8 @@ div.chosen-pokemon-list > * {
 .chosen-pokemon-list h1 {
   text-align: center;
   background: var(--list-bg-color);
+  color: white;
+  font-size: 1.5rem;
 }
 .poke-container {
   grid-area: pc;
@@ -120,7 +128,7 @@ div.chosen-pokemon-list > * {
   max-height: 20rem;
   background-color: #eee;
   border-radius: 0.5rem;
-  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+  box-shadow: 0 3px 15px rgba(107, 108, 110, 0.948);
   margin: 0.1rem;
   padding: 0.3rem;
   text-align: center;
@@ -221,19 +229,20 @@ div.chosen-pokemon-list > * {
   margin: 10px;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
   width: 300px;
-  height: 30px;
+  height: 50px;
 }
 
 .login button,
 .signUp button {
   margin: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 3px solid red;
+  border-radius: 10px;
+  font-size: large;
   width: 320px;
-  height: 30px;
+  height: 50px;
   cursor: pointer;
 }
 
@@ -241,11 +250,9 @@ div.chosen-pokemon-list > * {
 .signUp label {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
+  font-size: 40px;
   color: white;
 }
-
-
 
 .row {
   flex: 33%;
@@ -271,7 +278,7 @@ div.chosen-pokemon-list > * {
 
 h4 {
   font-family: Arial, Helvetica, sans-serif;
-  color: red;
+  color: white;
   font-size: 2rem;
 }
 
@@ -284,29 +291,35 @@ h4 {
 }
 .joinGame input {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 3px solid rgb(172, 17, 17);
+  border-radius: 10px;
   /* width: 220px; */
-  height: 2rem;
+  height: 3rem;
+  width: 200px;
+  margin: 20px;
 }
 
 .log-out {
   grid-area: out;
   display: flex;
   justify-content: center;
+  border: 3px solid rgb(172, 17, 17);
   align-items: center;
-  max-width: fit-content;
-  max-height: 2rem;
-  border-radius: 5px;
+  max-width: 10rem;
+  max-height: 3rem;
+  border-radius: 10px;
   padding: 10px;
 }
 
 .joinGame button {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 3px solid rgb(172, 17, 17);
+  border-radius: 10px;
   /* width: 220px; */
   /* height: 51px; */
   cursor: pointer;
+  height: 3rem;
+  width: 200px;
+  margin: 10px;
 }
 /* game details end */
