@@ -60,8 +60,8 @@ function App() {
             </button>
           </Chat>
           <Pokelist />
-          <Pagination />
-          <Footer />
+          {/* <Pagination /> */}
+          {/* <Footer /> */}
         </>
       ) : (
         <>

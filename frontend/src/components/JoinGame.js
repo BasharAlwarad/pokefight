@@ -7,8 +7,15 @@ function JoinGame() {
   const [rivalUsername, setRivalUsername] = useState('')
   const { client } = useChatContext()
   const [channel, setChannel] = useState(null)
-
+  const [pokemonArr, setPokemonArr] = useState(
+    JSON.parse(localStorage.getItem('pokeArr'))
+  )
+console.log(pokemonArr)
   const createChannel = async () => {
+    if (pokemonArr && pokemonArr.length <= 4) {
+      alert('Not enough card!')
+      return
+    }
     const response = await client.queryUsers({ name: { $eq: rivalUsername } })
     if (response.users.length === 0) {
       alert('User not found')
@@ -23,7 +30,7 @@ function JoinGame() {
 
   // console.log(client.user.name);
   return (
-  <>
+    <>
       {channel ? (
         <Channel channel={channel} Input={CustomInput}>
           <Game channel={channel} setChannel={setChannel} />

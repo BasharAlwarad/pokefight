@@ -34,11 +34,16 @@
 
 .board {
   grid-area: board;
-  background-color: rgb(252, 252, 252);
+  background-color: rgba(252, 252, 252, 0.426);
   border: 1px solid black;
-
+  
   display: flex;
   flex-direction: column;
+}
+
+.board>*{
+  background-color: rgba(252, 252, 252, 0.426);
+
 }
 
 .leave-game {
@@ -182,4 +187,14 @@
 .emoji-mart-emoji-custom span {
   height: 15px !important;
   width: 15px !important;
+}
+
+
+.chosen-pokemon-yours{
+  max-width: 20rem;
+  min-width: 20rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* background: red; */
+  user-select: none;
 }
