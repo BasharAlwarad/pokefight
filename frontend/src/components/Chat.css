@@ -35,7 +35,7 @@
 .board {
   grid-area: board;
   background-color: rgba(252, 252, 252, 0.426);
-  border: 1px solid black;
+  /* border: 1px solid black; */
   
   display: flex;
   flex-direction: column;
@@ -195,6 +195,5 @@
   min-width: 20rem;
   background-size: contain;
   background-repeat: no-repeat;
-  /* background: red; */
   user-select: none;
 }

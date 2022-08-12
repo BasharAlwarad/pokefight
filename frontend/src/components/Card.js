@@ -1,16 +1,17 @@
 import React from 'react'
 
 const Card = props => {
-  const { fromBoard, pokemon } = props
+  const { choose, fromBoard, pokemon } = props
 
   const onclick = e => {
-    if (fromBoard &&e.target.parentElement.classList.contains("fromBoard")) {
-      console.log(e)
-      e.target.parentElement.style.display="none"
+    if (fromBoard && e.target.parentElement.classList.contains('fromBoard')) {
+      e.target.parentElement.style.display = 'none'
     }
-    if (fromBoard &&e.target.classList.contains("fromBoard")) {
-      console.log(e)
-      e.target.style.display="none"
+    if (fromBoard && e.target.classList.contains('fromBoard')) {
+      e.target.style.display = 'none'
+    }
+    if (choose) {
+      choose()
     }
     props.func(pokemon)
 
