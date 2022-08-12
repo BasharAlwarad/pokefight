@@ -1,8 +1,17 @@
 import React from 'react'
 
 const Card = props => {
-  const { pokemon, i } = props
+  const { fromBoard, pokemon } = props
+
   const onclick = e => {
+    if (fromBoard &&e.target.parentElement.classList.contains("fromBoard")) {
+      console.log(e)
+      e.target.parentElement.style.display="none"
+    }
+    if (fromBoard &&e.target.classList.contains("fromBoard")) {
+      console.log(e)
+      e.target.style.display="none"
+    }
     props.func(pokemon)
 
     if (e.target.classList.contains('clicked')) {
@@ -12,9 +21,12 @@ const Card = props => {
     } else {
       e.target.classList.add('clicked')
     }
+    if (fromBoard) {
+      return
+    }
     let arr = []
     if (localStorage.getItem('pokeArr')) {
-      if (JSON.parse(localStorage.getItem('pokeArr')).length <= 2) {
+      if (JSON.parse(localStorage.getItem('pokeArr')).length <= 4) {
         JSON.parse(localStorage.getItem('pokeArr')).forEach(e => {
           arr.push(e)
         })
@@ -23,6 +35,7 @@ const Card = props => {
         localStorage.setItem('pokeArr', JSON.stringify(arr))
       } else {
         alert('Max Pokemons count!')
+        return
       }
     } else {
       arr.push(pokemon)
@@ -32,7 +45,7 @@ const Card = props => {
 
   return (
     <div
-      className='pokemon'
+      className={`pokemon ${fromBoard ? 'fromBoard' : ''}`}
       onClick={e => onclick(e)}
       style={{ background: pokemon.color }}
     >
@@ -47,13 +60,15 @@ const Card = props => {
         <h3 className=''>
           {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
         </h3>
-        <small className='type'>
-          Type:{' '}
-          <span>
-            {pokemon.types[0].type.name} /{' '}
-            {pokemon.types[1] && pokemon.types[1].type.name}
-          </span>
-        </small>
+        {!fromBoard && (
+          <small className='type'>
+            Type:{' '}
+            <span>
+              {pokemon.types[0].type.name} /{' '}
+              {pokemon.types[1] && pokemon.types[1].type.name}
+            </span>
+          </small>
+        )}
         {pokemon && pokemon.base && (
           <div className='cards-lists'>
             <ul className='cards-base-list'>
@@ -61,11 +76,13 @@ const Card = props => {
               <li>Attack: {pokemon.base.Attack}</li>
               <li>Defense: {pokemon.base.Defense}</li>
             </ul>
-            <ul className='cards-base-list'>
-              <li>Sp.Attack: {pokemon.base['Sp. Attack']}</li>
-              <li>Sp.Defense: {pokemon.base['Sp. Defense']}</li>
-              <li>Speed: {pokemon.base.Speed}</li>
-            </ul>
+            {!fromBoard && (
+              <ul className='cards-base-list'>
+                <li>Sp.Attack: {pokemon.base['Sp. Attack']}</li>
+                <li>Sp.Defense: {pokemon.base['Sp. Defense']}</li>
+                <li>Speed: {pokemon.base.Speed}</li>
+              </ul>
+            )}
           </div>
         )}
       </div>

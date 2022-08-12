@@ -3,6 +3,7 @@ import { useChannelStateContext, useChatContext } from 'stream-chat-react'
 import Square from './Square'
 import { Patterns } from '../WinningPatterns'
 import Card from './Card'
+import BackCard from './BackCard'
 import Cookies from 'universal-cookie'
 
 function Board({ you, other, result, setResult }) {
@@ -16,7 +17,8 @@ function Board({ you, other, result, setResult }) {
   const [rival, setRival] = useState(other && other)
   const { channel } = useChannelStateContext()
   const { client } = useChatContext()
-
+  const [chosenCard, setChosenCard] = useState({})
+  const [chosenPokemonTurn, setChosenPokemonTurn] = useState('')
   const cookies = new Cookies()
 
   const [realYou, setRealYou] = useState(
@@ -27,6 +29,7 @@ function Board({ you, other, result, setResult }) {
     checkIfTie()
     checkWin()
   }, [board])
+
   const chooseSquare = async square => {
     if (turn === player && board[square] === '') {
       setTurn(player === 'X' ? 'O' : 'X')
@@ -92,120 +95,69 @@ function Board({ you, other, result, setResult }) {
     }
   })
 
+  const get_pokemon = v => {
+    setChosenCard(v)
+  }
+
   return (
     <div className='board'>
       {owner === realYou ? (
         <>
           <div className='row'>
-            {/* <Square
-              val={board[0]}
-              chooseSquare={() => {
-                chooseSquare(0)
-              }}
-            />
-            <Square
-              val={board[1]}
-              chooseSquare={() => {
-                chooseSquare(1)
-              }}
-            />
-            <Square
-              val={board[2]}
-              chooseSquare={() => {
-                chooseSquare(2)
-              }}
-            /> */}
-            <Card pokemon={pokemonArr[0]} />
-            <Card pokemon={pokemonArr[1]} />
-            <Card pokemon={pokemonArr[2]} />
+            {pokemonArr &&
+              pokemonArr.map(e => (
+                <Card fromBoard choose={chooseSquare} func={get_pokemon} pokemon={e} />
+              ))}
           </div>
           <div className='row'>
-            <Square
-              val={board[3]}
-              chooseSquare={() => {
-                chooseSquare(3)
+            <div
+              className='chosen-pokemon-yours'
+              style={{
+                backgroundImage: ` url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${chosenCard.id}.svg")`,
               }}
-            />
+            ></div>
             <Square
+              owner={owner}
+              realYou={realYou}
               val={board[4]}
               chooseSquare={() => {
                 chooseSquare(4)
               }}
             />
-            <Square
-              val={board[5]}
-              chooseSquare={() => {
-                chooseSquare(5)
-              }}
-            />
+            <BackCard />
           </div>
           <div className='row'>
-            <Square
-              val={board[6]}
-              chooseSquare={() => {
-                chooseSquare(6)
-              }}
-            />
-            <Square
-              val={board[7]}
-              chooseSquare={() => {
-                chooseSquare(7)
-              }}
-            />
-            <Square
-              val={board[8]}
-              chooseSquare={() => {
-                chooseSquare(8)
-              }}
-            />
+            {pokemonArr && pokemonArr.map(e => <BackCard />)}
           </div>
         </>
       ) : (
         <>
           <div className='row'>
-            <Square
-              val={board[0]}
-              chooseSquare={() => {
-                chooseSquare(0)
-              }}
-            />
-            <Square
-              val={board[1]}
-              chooseSquare={() => {
-                chooseSquare(1)
-              }}
-            />
-            <Square
-              val={board[2]}
-              chooseSquare={() => {
-                chooseSquare(2)
-              }}
-            />
+            {pokemonArr && pokemonArr.map(e => <BackCard />)}
           </div>
           <div className='row'>
+            <BackCard />
             <Square
-              val={board[3]}
-              chooseSquare={() => {
-                chooseSquare(3)
-              }}
-            />
-            <Square
+              owner={owner}
+              realYou={realYou}
               val={board[4]}
               chooseSquare={() => {
                 chooseSquare(4)
               }}
             />
-            <Square
-              val={board[5]}
-              chooseSquare={() => {
-                chooseSquare(5)
+
+            <div
+              className='chosen-pokemon-yours'
+              style={{
+                backgroundImage: ` url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${chosenCard.id}.svg")`,
               }}
-            />
+            ></div>
           </div>
           <div className='row'>
-            <Card pokemon={pokemonArr[0]} />
-            <Card pokemon={pokemonArr[1]} />
-            <Card pokemon={pokemonArr[2]} />
+            {pokemonArr &&
+              pokemonArr.map(e => (
+                <Card fromBoard choose={chooseSquare} func={get_pokemon} pokemon={e} />
+              ))}
           </div>
         </>
       )}

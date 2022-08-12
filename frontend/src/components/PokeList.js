@@ -21,7 +21,7 @@ function Pokelist() {
     fighting: '#E6E0D4',
     normal: '#F5F5F5',
   }
-  const [pokemon_count, setPokemon_count] = useState(3)
+  const [pokemon_count, setPokemon_count] = useState(10)
   const [pokemon_Arr, setPokemon_Arr] = useState([])
   const [chosenPokemon, setChosenPokemon] = useState(
     localStorage.getItem('pokeArr') &&
@@ -64,6 +64,7 @@ function Pokelist() {
     pokemon.base = base
   }
 
+
   // pull pokemon list value from pokemon card component
   const get_pokemon = v => {
     setChangeInCard(v)
@@ -74,7 +75,7 @@ function Pokelist() {
   }, [])
 
   useEffect(() => {
-    setChosenPokemon(JSON.parse(localStorage.getItem("pokeArr")))
+    setChosenPokemon(JSON.parse(localStorage.getItem('pokeArr')))
   }, [changeInCard])
 
   return (
